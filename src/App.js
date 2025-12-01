@@ -11,7 +11,7 @@ function App() {
   const [posters, setPosters] = useState([]);
 
   // URL backend
-  const API = 'http://localhost:5000/api';
+  const API = 'https://backend-4bx8.onrender.com/api';
 
   // --- LOGIN ---
   const login = async () => {
