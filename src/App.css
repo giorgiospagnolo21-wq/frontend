@@ -1,38 +1,122 @@
-.App {
-  text-align: center;
+/* FONT APPLE-LIKE */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  padding: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* CONTENITORE PRINCIPALE */
+div {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+div:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* TITOLI */
+h2 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #000;
+}
+
+/* INPUT GENERALI */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="email"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 1px solid #d2d2d2;
+  font-size: 16px;
+  background: #fafafa;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #0071e3;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 5px;
+  background: #0071e3;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
   color: white;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background: #0b84ff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button:active {
+  transform: scale(0.98);
+}
+
+/* PREVIEW IMMAGINI */
+img {
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* CARD POSTER */
+.poster-item {
+  padding: 15px;
+  background: #fff;
+  border-radius: 14px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* DESCRIZIONE POSTER */
+.poster-item p {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  div {
+    padding: 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  h2 {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 12px;
   }
 }
