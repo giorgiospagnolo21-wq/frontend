@@ -1,15 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import VotePage from './pages/VotePage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/vote" element={<VotePage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
