@@ -86,8 +86,19 @@ function MainPage() {
           <h2>Carica Poster</h2>
           {preview && <img src={preview} alt="preview" width={150} />}
           <input type="file" onChange={onFileChange} />
-          <input value={description} onChange={e => setDescription(e.target.value)} />
+          <input
+          placeholder="Titolo (obbligatorio)"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+          placeholder="Descrizione"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={3}
+          />
           <button onClick={uploadPoster}>Carica</button>
+
 
           <h2>Lista Poster</h2>
           {posters.map(p => (
