@@ -1,122 +1,142 @@
-/* FONT APPLE-LIKE */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-
+/* Base */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: #f5f5f7;
-  color: #1d1d1f;
-  padding: 30px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f7f9;
+  color: #111;
 }
 
-/* CONTENITORE PRINCIPALE */
-div {
-  max-width: 500px;
-  margin: auto;
+/* Layout container generico */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
-  background: white;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: 0.3s ease;
 }
 
-div:hover {
-  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
-}
-
-/* TITOLI */
 h2 {
-  font-weight: 600;
-  margin-bottom: 15px;
-  font-size: 24px;
-  color: #000;
+  margin: 14px 0 10px;
 }
 
-/* INPUT GENERALI */
-input[type="text"],
-input[type="password"],
-input[type="file"],
-input[type="email"] {
-  width: 100%;
-  padding: 12px 14px;
-  margin: 12px 0;
-  border-radius: 12px;
-  border: 1px solid #d2d2d2;
-  font-size: 16px;
-  background: #fafafa;
-  transition: 0.2s;
-}
-
-input:focus {
-  border-color: #0071e3;
+/* Form */
+input, textarea {
+  width: 320px;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
   outline: none;
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
+  margin-top: 8px;
+  display: block;
 }
 
-/* BUTTON */
+textarea {
+  resize: vertical;
+  min-height: 44px;
+}
+
+input:focus, textarea:focus {
+  border-color: #999;
+}
+
+/* Buttons */
 button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 5px;
-  background: #0071e3;
-  border: none;
-  border-radius: 12px;
-  font-size: 17px;
-  font-weight: 600;
-  color: white;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.2s;
+  background: #111;
+  color: #fff;
 }
 
 button:hover {
-  background: #0b84ff;
+  opacity: 0.9;
 }
 
-button:active {
-  transform: scale(0.98);
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* PREVIEW IMMAGINI */
-img {
-  border-radius: 12px;
-  width: 100%;
-  margin-bottom: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* CARD POSTER */
-.poster-item {
-  padding: 15px;
-  background: #fff;
-  border-radius: 14px;
-  margin-top: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-
-/* DESCRIZIONE POSTER */
-.poster-item p {
+/* Preview */
+.preview-img {
+  display: block;
   margin-top: 10px;
-  font-size: 16px;
-  line-height: 1.4;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  div {
-    padding: 16px;
-  }
+/* Poster cards */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
 
-  h2 {
-    font-size: 22px;
-  }
+.poster-card {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 12px;
+}
 
-  button {
-    padding: 12px;
-  }
+.poster-card img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* Titolo: più grande e grassetto, non esce dal riquadro */
+.poster-title {
+  font-weight: 800;
+  font-size: 18px;
+  margin: 10px 0 6px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;  /* max 2 righe */
+  line-clamp: 2;
+
+  word-break: break-word;
+}
+
+/* Descrizione: più piccola, clamp */
+.poster-desc {
+  font-size: 14px;
+  margin: 0 0 10px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* max 3 righe */
+  line-clamp: 3;
+
+  word-break: break-word;
+}
+
+/* Riga voti */
+.poster-votes {
+  margin: 6px 0 10px;
+}
+
+/* Pulsanti dentro card */
+.poster-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.poster-actions .danger {
+  background: #b00020;
 }
