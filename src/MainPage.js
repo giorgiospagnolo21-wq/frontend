@@ -8,6 +8,7 @@ function MainPage() {
   const [password, setPassword] = useState('');
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState('');
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [posters, setPosters] = useState([]);
 
