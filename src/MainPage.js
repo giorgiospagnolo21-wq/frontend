@@ -35,21 +35,30 @@ function MainPage() {
     setPreview(URL.createObjectURL(f));
   };
 
-  const uploadPoster = async () => {
+ const uploadPoster = async () => {
+  try {
     if (!file) return alert('Seleziona un file!');
+    if (!title.trim()) return alert('Inserisci un titolo!');
+
     const formData = new FormData();
-    formData.append('poster', file);
+    formData.append('poster', file);          // DEVE chiamarsi "poster"
+    formData.append('title', title.trim());
     formData.append('description', description);
 
     await axios.post(`${API}/upload`, formData, {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` }, // meglio Bearer
     });
 
     setFile(null);
     setPreview('');
+    setTitle('');
     setDescription('');
     loadPosters();
-  };
+  } catch (err) {
+    console.error(err);
+    alert(err.response?.data?.message || err.response?.data?.error || 'Errore upload');
+  }
+};
 
   const loadPosters = async () => {
     const res = await axios.get(`${API}/posters`, {
