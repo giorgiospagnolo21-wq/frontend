@@ -8,7 +8,6 @@ function MainPage() {
   const [password, setPassword] = useState('');
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState('');
-  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [posters, setPosters] = useState([]);
 
@@ -32,58 +31,38 @@ function MainPage() {
 
   const onFileChange = (e) => {
     const f = e.target.files[0];
-    if (!f) return;
     setFile(f);
     setPreview(URL.createObjectURL(f));
   };
 
   const uploadPoster = async () => {
-    try {
-      if (!file) return alert('Seleziona un file!');
-      if (!title.trim()) return alert('Inserisci un titolo!');
+    if (!file) return alert('Seleziona un file!');
+    const formData = new FormData();
+    formData.append('poster', file);
+    formData.append('description', description);
 
-      const formData = new FormData();
-      formData.append('poster', file);
-      formData.append('title', title.trim());
-      formData.append('description', description);
+    await axios.post(`${API}/upload`, formData, {
+      headers: { Authorization: token },
+    });
 
-      await axios.post(`${API}/upload`, formData, {
-        headers: { Authorization: token },
-      });
-
-      setFile(null);
-      setPreview('');
-      setTitle('');
-      setDescription('');
-      loadPosters();
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || 'Errore upload');
-    }
+    setFile(null);
+    setPreview('');
+    setDescription('');
+    loadPosters();
   };
 
   const loadPosters = async () => {
-    try {
-      const res = await axios.get(`${API}/posters`, {
-        headers: { Authorization: token },
-      });
-      setPosters(res.data);
-    } catch (err) {
-      console.error(err);
-      alert('Errore caricamento posters');
-    }
+    const res = await axios.get(`${API}/posters`, {
+      headers: { Authorization: token },
+    });
+    setPosters(res.data);
   };
 
   const deletePoster = async (id) => {
-    try {
-      await axios.delete(`${API}/delete/${id}`, {
-        headers: { Authorization: token },
-      });
-      loadPosters();
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || 'Errore eliminazione');
-    }
+    await axios.delete(`${API}/delete/${id}`, {
+      headers: { Authorization: token },
+    });
+    loadPosters();
   };
 
   useEffect(() => {
@@ -106,28 +85,13 @@ function MainPage() {
           <h2>Carica Poster</h2>
           {preview && <img src={preview} alt="preview" width={150} />}
           <input type="file" onChange={onFileChange} />
-
-          {/* ✅ TITOLO come textarea */}
-          <textarea
-            placeholder="Titolo (obbligatorio)"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            rows={2}
-          />
-
-          <textarea
-            placeholder="Descrizione"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-          />
-
+          <input value={description} onChange={e => setDescription(e.target.value)} />
           <button onClick={uploadPoster}>Carica</button>
 
           <h2>Lista Poster</h2>
           {posters.map(p => (
             <div key={p.id}>
-              <img src={p.file} width={200} alt="poster" />
+              <img src={p.file} width={200} />
               <p>{p.description}</p>
               <button onClick={() => deletePoster(p.id)}>Elimina</button>
             </div>
